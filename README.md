@@ -9,8 +9,8 @@ collude with others, none of them have access to individual client submissions.
 The following entities participate:
 1. The **clients** are interested in preserving the privacy of their data.
 2. The **aggregation servers** are run by parties that are interested
-   in protecting the client data from each other.
-3. The **ML server** is run by a party interested in filtering our maliciously crafted client responses.
+   in protecting the client data from the owners of the other aggregation servers.
+3. The **ML server** is run by a party interested in only training on valid client responses.
 
 ## How it works
 1. The ML server distributes its current model to the clients.
