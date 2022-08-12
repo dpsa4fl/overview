@@ -18,7 +18,7 @@ The following entities participate:
 2. Each client locally computes the gradient vector for that model based on its data.
 3. Each client splits its gradient vector into *gradient shares* and submits
    a share to each aggregation server.
-4. The aggregation servers verify that the submitted vectors are well-formed (clipped, with `L2 norm <= 1`).
+4. The aggregation servers verify that the submitted vectors are well-formed (clipped, with L2 norm less than 1).
    This is done in a distributed way, without any knowledge being gained about the values of the clients' submissions.
 5. The aggregation servers compute the *aggregate gradient* as a sum of all client gradients. It is public information
    and is sent to the ML server.
