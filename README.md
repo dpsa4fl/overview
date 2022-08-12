@@ -20,7 +20,8 @@ The following entities participate:
    a share to each aggregation server.
 4. The aggregation servers verify that the submitted vectors are well-formed (clipped, with L2 norm less than 1).
    This is done in a distributed way, without any knowledge being gained about the values of the clients' submissions.
-5. The aggregation servers compute the *aggregate gradient* as a sum of all client gradients. It is public information
-   and is sent to the ML server.
+5. Each aggregation server adds noise to the clients' shares to provide pre-established privacy guarantees.
+5. The aggregation servers compute the *aggregate gradient* as a sum of all client gradients. It contains noise from all the
+   aggregation servers and is sent to the ML server.
 6. The ML server updates its model and can initiate a new training round. 
 
