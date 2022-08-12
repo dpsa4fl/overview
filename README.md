@@ -4,4 +4,4 @@ The goal of this project is to create a system for federated machine learning wi
  - The server has a guarantee that the client updates are not malformed.
 
 ## Overview
-![overview](./dpsa-overview.svg)
+![overview](./dpsa-overview-2.svg)
