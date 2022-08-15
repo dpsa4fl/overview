@@ -6,7 +6,7 @@ The goal of this project is to create a system for federated machine learning wh
 
 The following entities participate:
 1. The **clients** are interested in preserving the privacy of their data. They may be malicious.
-2. At least two **aggregation servers** participate, of which at least one must be honest (but can be curious). All other servers may be malicious.
+2. At least one of the **aggregation servers** must be honest (but can be curious). All other servers may be malicious.
 3. The **ML server** may be malicious.
 
 If the properties stated above are met by the participants, the clients' **anonymity** (no adversary can tell which client submitted which data value), **privacy** (no adversary learns anything about the clients' data values except their aggregate), and even [**differential privacy**](https://en.wikipedia.org/wiki/Differential_privacy) can be guaranteed.
