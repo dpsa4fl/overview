@@ -11,6 +11,8 @@ The following entities participate:
 
 If the properties stated above are met by the participants, the clients' **anonymity** (no adversary can tell which client submitted which data value), **privacy** (no adversary learns anything about the clients' data values except their aggregate), and even [**differential privacy**](https://en.wikipedia.org/wiki/Differential_privacy) can be guaranteed.
 
+Correctness of the result of the learning procedure requires honesty of all participants.
+
 ## How it works
 1. The ML server distributes its current model to the clients.
 2. Each client locally computes the gradient vector for that model based on its data.
