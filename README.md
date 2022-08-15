@@ -25,3 +25,6 @@ The following entities participate:
    aggregation servers and is sent to the ML server.
 6. The ML server updates its model and can initiate a new training round. 
 
+## Implementation
+For aggregation of gradient vectors we use [prio-rs](https://github.com/divviup/libprio-rs).
+Its mechanism for zero-knowledge proofs on secret-shared data (which is used for verifying that gradient vectors are bounded) is described [here](https://crypto.stanford.edu/prio) and [here](https://eprint.iacr.org/2019/188). We plan to use the [flower](https://github.com/adap/flower) framework for federation.
