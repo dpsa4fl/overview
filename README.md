@@ -1,5 +1,5 @@
 # Differential Privacy for Federated Learning
-The goal of this project is to create a system for federated machine learning where differential privacy of any individual client's data can be guaranteed, using [global differential privacy](https://desfontain.es/privacy/local-global-differential-privacy.html).
+The goal of this project is to create a system for federated machine learning where differential privacy of any individual client's data can be guaranteed, using [global differential privacy](https://desfontain.es/privacy/local-global-differential-privacy.html) without requiring trust in a single aggregator.
 
 ## Setup
 ![overview](./dpsa-overview-2.svg)
@@ -11,7 +11,7 @@ The following entities participate:
 
 If the properties stated above are met by the participants, the clients' **anonymity** (no adversary can tell which client submitted which data value), **privacy** (no adversary learns anything about the clients' data values except their aggregate), and even [**differential privacy**](https://en.wikipedia.org/wiki/Differential_privacy) can be guaranteed.
 
-Correctness of the result of the learning procedure requires honesty of all participants.
+Correctness of the result of the learning procedure requires honesty of all participants. As differential privacy persists even for malicious clients, the learning result is guaranteed to at least be robust towards data poisoning in that case.
 
 ## How it works
 1. The ML server distributes its current model to the clients.
