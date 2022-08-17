@@ -5,13 +5,22 @@ The goal of this project is to create a system for federated machine learning wh
 ![overview](./dpsa-overview-2.svg)
 
 The following entities participate:
-1. The **clients** are interested in preserving the privacy of their data. They may be malicious.
-2. At least one of the **aggregation servers** must be honest (but can be curious). All other servers may be malicious.
-3. The **ML server** may be malicious.
+1. The **clients** hold sensitive data on which the machine learning task is supposed to be executed.
+2. The **aggregation servers** perform gradient aggregation without seeing plaintext submissions.
+3. The **ML server** holds the current model, updates according to gradient aggregates, and distributes the update.
 
-If the properties stated above are met by the participants, the clients' **anonymity** (no adversary can tell which client submitted which data value), **privacy** (no adversary learns anything about the clients' data values except their aggregate), and even [**differential privacy**](https://en.wikipedia.org/wiki/Differential_privacy) can be guaranteed.
+We aim to provide the following privacy guarantees:
+- **Anonymity** (no adversary can tell which client submitted which data value) and **privacy** (no adversary learns anything about an honest clients' data values except the aggregate) an be guaranteed if
+   - all clients are malicious
+   - at least one aggregation server is honest but curious, the remaining ones are malicious
+   - the ML server is malicious
+- [**Differential privacy**](https://en.wikipedia.org/wiki/Differential_privacy) can be guaranteed if
+   - all clients are malicious
+   - all aggregation servers are honest but curious
+   - the ML server is malicious
 
 Correctness of the result of the learning procedure requires honesty of all participants. As differential privacy persists even for malicious clients, the learning result is guaranteed to at least be robust towards data poisoning in that case.
+
 
 ## How it works
 1. The ML server distributes its current model to the clients.
