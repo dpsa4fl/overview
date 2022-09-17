@@ -1,6 +1,23 @@
 # Differential Privacy for Federated Learning
 The goal of this project is to create a system for federated machine learning where differential privacy of any individual client's data can be guaranteed, using [global differential privacy](https://desfontain.es/privacy/local-global-differential-privacy.html) without requiring trust in a single aggregator.
 
+## Motivation
+Machine learning aims to automatically improve a model given sample data. Many problems in the field are formulated as the search for a parameter set to the model that is is optimal w.r.t. some objective function. If the model is suitable (like the ubiquitous [neural network models](https://en.wikipedia.org/wiki/Artificial_neural_network) are), variants of [stochastic gradient descent (SGD)](https://en.wikipedia.org/wiki/Stochastic_gradient_descent) are frequently used to solve said optimization problem.
+
+In a nutshell, SGD computes the gradient of the model together with the objective function w.r.t. the current parameter set at all points from a random subset of the training data. The parameters are then updated in the opposite direction of the gradient sum. Intuitively, this moves the parameters in the direction of approximately the steepest ascent, hence hopefully towards a local maximum, of the objective function. This process is iterated until performance is statisfactory.
+
+Two privacy issues that arise when training on sensitive data are considered here:
+- The party executing the SGD computation has access to all data.
+- The model resulting from the training may be vulnerable to [inference attacks](https://arxiv.org/abs/1610.05820), even for an adversary that only has query access.
+
+## Approach
+We suggest the following solution:
+- **Federated learning with secure aggregation**. The gradients are computed locally by the data owners (referred to as "clients" hereafter). The gradient sum is computed by servers following a [secure aggregation protocol](https://datatracker.ietf.org/doc/draft-irtf-cfrg-vdaf/) where noone but the client ever sees their data in plain text. The model update is then performed publicly and used for the next iteration.
+
+- **[Differential privacy (DP)](https://desfontain.es/privacy/differential-privacy-awesomeness.html)**. A calibrated amount of noise is added to the gradients in each update step, trading model performance for protection of client privacy.
+   - The straightforward way of doing federated private learning is [local DP](https://desfontain.es/privacy/local-global-differential-privacy.html), making the clients add the noise locally before transmitting to the aggregation servers. This is great because it does not require trust in the aggregators. It has downsides though: The total noise is much larger than strictly necessary, as each client has to add the total amount of noise in case another client maliciously refrains from adding any noise. This affects model performance.
+   - [Global DP](https://desfontain.es/privacy/local-global-differential-privacy.html) to the rescue! The aggregation server adds the noise after computing the gradient sum. An arising problem in the federated setting is that the noise is calibrated under the assumption that the L2 norm of the gradients is bounded by 1, but the server only ever sees the gradient in cyphertext and cannot check. Luckily, the [VDAF protocols](https://datatracker.ietf.org/doc/draft-irtf-cfrg-vdaf/) allow the aggregator to compute certain verification functions on client submissions without knowing the plain text. This can be leveraged to ensure the norm bound server-side.
+
 ## Setup
 ![overview](./dpsa-overview-2.svg)
 
