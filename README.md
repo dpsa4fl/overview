@@ -66,7 +66,7 @@ This projects involves many repositories, the dependencies between them are as f
    securely aggregating gradient vectors from clients. This code is integrated upstream in the libprio-rs repository.
 2. [**janus**](https://github.com/divviup/janus): we add the necessary plumbing code for our new type to janus.
 3. [**dpsa4fl**](https://github.com/dpsa-project/dpsa4fl) depends on janus, it contains the core of our project: code necessary to interact with
-   janus servers specific to our use-case of federated learning.
+   janus servers specificly in the setting of federated learning.
 4. [**dpsa4fl-bindings.py**](https://github.com/dpsa-project/dpsa4fl-bindings.py) is a wrapper around dpsa4fl, and is released
    as a python package that can be downloaded from [PyPi](https://pypi.org/project/dpsa4fl-bindings/).
 5. [**dpsa4fl-example-project**](https://github.com/dpsa-project/dpsa4fl-example-project) is
