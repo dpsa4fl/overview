@@ -71,5 +71,5 @@ This projects involves many repositories, the dependencies between them are as f
    as a python package that can be downloaded from [PyPi](https://pypi.org/project/dpsa4fl-bindings/).
 5. [**dpsa4fl-example-project**](https://github.com/dpsa-project/dpsa4fl-example-project) is
    a fully working example of how to use dpsa4fl (via our python bindings) with the flower framework for differentially private federated learning.
-6. ~~[**dpsa4fl-janus-tasks**](https://github.com/dpsa-project/dpsa4fl-janus-tasks) is a small rust binary that allows for remote provision of tasks for janus, something that is currently not implemented in janus itself (https://github.com/divviup/janus/issues/760).~~ Currently this binary is included in the our janus fork.
+6. ~~[**dpsa4fl-janus-tasks**](https://github.com/dpsa-project/dpsa4fl-janus-tasks) is a small rust binary that allows for remote provision of tasks for janus, something that is currently not implemented in janus itself (https://github.com/divviup/janus/issues/760).~~ Currently this binary is included in our janus fork.
 7. [**dpsa4fl-testing-infrastructure**](https://github.com/dpsa-project/dpsa4fl-testing-infrastructure) contains a docker-compose file and further configuration files with which a local janus instance can be started (for testing purposes only).
