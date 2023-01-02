@@ -54,8 +54,9 @@ Correctness of the result of the learning procedure requires honesty of all part
 ## Roadmap
 - [x] For aggregation of gradient vectors we use [prio-rs](https://github.com/divviup/libprio-rs) with [fixed-point vectors](https://github.com/dpsa-project/libprio-rs). Its mechanism for zero-knowledge proofs on secret-shared data (which is used for verifying that gradient vectors are bounded) is described [here](https://crypto.stanford.edu/prio) and [here](https://eprint.iacr.org/2019/188). [This is done!](https://github.com/divviup/libprio-rs/pull/283)
 - [x] Integrate our new type into [janus](https://github.com/divviup/janus) which will provide the client/server infrastructure.
-- [ ] Use this with the [flower](https://github.com/adap/flower) framework for federated learning in python.
+- [x] Use this with the [flower](https://github.com/adap/flower) framework for federated learning in python.
 - [ ] Implement [discrete Gaussian sampling](https://arxiv.org/abs/2004.00010) and use it to add Differential Privacy to our prio type.
+- [ ] Cleanup our prototype implementation.
 
 ## Implementation
 This projects involves many repositories, the dependencies between them are as follows.
