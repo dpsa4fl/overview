@@ -1,5 +1,5 @@
-# Differential Privacy for Federated Learning
-The goal of this project is to create a system for federated machine learning where differential privacy of any individual client's data can be guaranteed, using [global differential privacy](https://desfontain.es/privacy/local-global-differential-privacy.html) without requiring trust in a single aggregator.
+# Differential Privacy for Federated Learning with Secure Aggregation
+The goal of this project is to create a system for federated machine learning where differential privacy of any individual client's data can be guaranteed, using [secure aggregation](https://crypto.stanford.edu/prio/) while providing [global differential privacy](https://desfontain.es/privacy/local-global-differential-privacy.html) without requiring trust in a single aggregator.
 
 ## Motivation
 Machine learning aims to automatically improve a model given sample data. Many problems in the field are formulated as the search for a parameter set to the model that is is optimal w.r.t. some objective function. If the model is suitable (like the ubiquitous [neural network models](https://en.wikipedia.org/wiki/Artificial_neural_network) are), variants of [stochastic gradient descent (SGD)](https://en.wikipedia.org/wiki/Stochastic_gradient_descent) are frequently used to solve said optimization problem.
@@ -54,25 +54,27 @@ Correctness of the result of the learning procedure requires honesty of all part
 ## Roadmap
 - [x] For aggregation of gradient vectors we use [prio-rs](https://github.com/divviup/libprio-rs) with [fixed-point vectors](https://github.com/dpsa-project/libprio-rs). Its mechanism for zero-knowledge proofs on secret-shared data (which is used for verifying that gradient vectors are bounded) is described [here](https://crypto.stanford.edu/prio) and [here](https://eprint.iacr.org/2019/188). [This is done!](https://github.com/divviup/libprio-rs/pull/283)
 - [x] Integrate our new type into [janus](https://github.com/divviup/janus) which will provide the client/server infrastructure. [This is done!](https://github.com/divviup/janus/pull/893)
-- [ ] Use this with the [flower](https://github.com/adap/flower) framework for federated learning in python.
-- [ ] Implement [discrete Gaussian sampling](https://arxiv.org/abs/2004.00010) and use it to add Differential Privacy to our prio type.
+- [x] Implement [discrete Gaussian sampling](https://arxiv.org/abs/2004.00010) and use it to add Differential Privacy to our prio type. [This is done!](https://github.com/dpsa-project/libprio-rs/blob/feature-simple-dp/src/flp/types/fixedpoint_l2/noise.rs)
+- [x] Use this with the [flower](https://github.com/adap/flower) framework for federated learning in python. [This is done!](https://github.com/dpsa-project/dpsa4fl-example-project)
+- [ ] Get our additions to janus and libprio accepted as pull requests.
 
 ## Implementation
 This projects involves many repositories, the dependencies between them are as follows.
 
-*Please note that not everything is implemented yet. Also note that libprio-rs and janus are not part of this project, we merely integrate some changes required for our use-case upstream.*
+*Please note that libprio-rs and janus are not part of this project, we merely integrate some changes required for our use-case upstream.*
 
-1. [**libprio-rs**](https://github.com/divviup/libprio-rs): we define a prio3 type with the purpose of
+- [**libprio-rs**](https://github.com/divviup/libprio-rs): we define a prio3 type with the purpose of
    securely aggregating gradient vectors from clients. This code is integrated upstream in the libprio-rs repository.
-2. [**janus**](https://github.com/divviup/janus): we add the necessary plumbing code for our new type to janus.
-3. [**dpsa4fl**](https://github.com/dpsa-project/dpsa4fl) depends on janus, it contains the core of our project: code necessary to interact with
+- [**janus**](https://github.com/divviup/janus): we add the necessary plumbing code for our new type to janus.
+- [**dpsa4fl**](https://github.com/dpsa-project/dpsa4fl) depends on janus, it contains the core of our project: code necessary to interact with
    janus servers specifically in the setting of federated learning.
-4. [**dpsa4fl-bindings.py**](https://github.com/dpsa-project/dpsa4fl-bindings.py) is a wrapper around dpsa4fl, and is released
+- [**dpsa4fl-bindings.py**](https://github.com/dpsa-project/dpsa4fl-bindings.py) is a wrapper around dpsa4fl, and is released
    as a python package that can be downloaded from [PyPi](https://pypi.org/project/dpsa4fl-bindings/).
-5. [**dpsa4fl-example-project**](https://github.com/dpsa-project/dpsa4fl-example-project) is
+- [**dpsa4fl-janus-tasks**](https://github.com/dpsa-project/dpsa4fl-janus-tasks) is a small rust binary that allows for remote provision of tasks for janus, something that is currently not implemented in janus itself (https://github.com/divviup/janus/issues/760).~~ Currently this binary is included in our janus fork.
+- [**dpsa4fl-testing-infrastructure**](https://github.com/dpsa-project/dpsa4fl-testing-infrastructure) contains a docker-compose file and further configuration files with which a local janus instance can be started (for testing purposes only).
+- [**dpsa-flower**](https://github.com/dpsa-project/dpsa-flower) implements client and server to use the [flower framework](https://github.com/adap/flower) for federation.
+- [**dpsa4fl-example-project**](https://github.com/dpsa-project/dpsa4fl-example-project) is
    a fully working example of how to use dpsa4fl (via our python bindings) with the flower framework for differentially private federated learning.
-6. ~~[**dpsa4fl-janus-tasks**](https://github.com/dpsa-project/dpsa4fl-janus-tasks) is a small rust binary that allows for remote provision of tasks for janus, something that is currently not implemented in janus itself (https://github.com/divviup/janus/issues/760).~~ Currently this binary is included in our janus fork.
-7. [**dpsa4fl-testing-infrastructure**](https://github.com/dpsa-project/dpsa4fl-testing-infrastructure) contains a docker-compose file and further configuration files with which a local janus instance can be started (for testing purposes only).
 
 ## Notes
 This project is funded through the NGI Assure Fund, a fund established by NLnet with financial support from the European Commission's Next Generation Internet programme, under the aegis of DG Communications Networks, Content and Technology under grant agreement No 957073.
