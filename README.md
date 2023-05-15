@@ -52,10 +52,10 @@ Correctness of the result of the learning procedure requires honesty of all part
 6. The ML server updates its model and can initiate a new training round.
 
 ## Roadmap
-- [x] For aggregation of gradient vectors we use [prio-rs](https://github.com/divviup/libprio-rs) with [fixed-point vectors](https://github.com/dpsa-project/libprio-rs). Its mechanism for zero-knowledge proofs on secret-shared data (which is used for verifying that gradient vectors are bounded) is described [here](https://crypto.stanford.edu/prio) and [here](https://eprint.iacr.org/2019/188). [This is done!](https://github.com/divviup/libprio-rs/pull/283)
-- [x] Integrate our new type into [janus](https://github.com/divviup/janus) which will provide the client/server infrastructure. [This is done!](https://github.com/divviup/janus/pull/893)
-- [x] Implement [discrete Gaussian sampling](https://arxiv.org/abs/2004.00010) and use it to add Differential Privacy to our prio type. [This is done!](https://github.com/dpsa-project/libprio-rs/blob/feature-simple-dp/src/flp/types/fixedpoint_l2/noise.rs)
-- [x] Use this with the [flower](https://github.com/adap/flower) framework for federated learning in python. [This is done!](https://github.com/dpsa-project/dpsa4fl-example-project)
+- [x] For aggregation of gradient vectors we use [prio-rs](https://github.com/divviup/libprio-rs) with [fixed-point vectors](https://github.com/dpsa-project/libprio-rs). Its mechanism for zero-knowledge proofs on secret-shared data (which is used for verifying that gradient vectors are bounded) is described on the [prio webpage](https://crypto.stanford.edu/prio) and in the [Zero-Knowledge Proofs on Secret-Shared Data via Fully Linear PCPs](https://eprint.iacr.org/2019/188) paper. This was done in our [pull request to prio](https://github.com/divviup/libprio-rs/pull/283)!
+- [x] Integrate our new type into [janus](https://github.com/divviup/janus) which will provide the client/server infrastructure. This was done in out [pull request to janus](https://github.com/divviup/janus/pull/893)!
+- [x] Implement [discrete Gaussian sampling](https://arxiv.org/abs/2004.00010) and use it to add Differential Privacy to our prio type. This was done on our [prio fork](https://github.com/dpsa-project/libprio-rs/blob/feature-simple-dp/src/flp/types/fixedpoint_l2/noise.rs)!
+- [x] Use this with the [flower](https://github.com/adap/flower) framework for federated learning in python. This was done in our [dpsa4fl example project](https://github.com/dpsa-project/dpsa4fl-example-project)!
 - [ ] Get our additions to janus and libprio accepted as pull requests.
 
 ## Implementation
