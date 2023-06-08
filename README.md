@@ -36,6 +36,8 @@ We aim to provide the following privacy guarantees:
    - all aggregation servers are honest but curious
    - the ML server is malicious
 
+**NOTE**: The reason for requiring all aggregation servers to be honest is that prio only guarantees robustness in such a case (see, e.g., the [prio paper](https://crypto.stanford.edu/prio/paper.pdf)). Robustness is required to know that all submitted vectors are clipped as intended.
+
 Correctness of the result of the learning procedure requires honesty of all participants. As differential privacy persists even for malicious clients, the learning result is guaranteed to at least be robust towards data poisoning in that case.
 
 
