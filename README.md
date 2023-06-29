@@ -1,5 +1,5 @@
 # Differential Privacy for Federated Learning with Secure Aggregation
-The goal of this project is to create a system for federated machine learning where differential privacy of any individual client's data can be guaranteed, using [secure aggregation](https://crypto.stanford.edu/prio/) while providing [global differential privacy](https://desfontain.es/privacy/local-global-differential-privacy.html) without requiring trust in a single aggregator.
+The goal of this project is to create a system for federated machine learning where differential privacy of any individual client's data can be guaranteed, using [secure aggregation](https://crypto.stanford.edu/prio/) while providing [global differential privacy](https://desfontain.es/privacy/local-global-differential-privacy.html).
 
 ## Motivation
 Machine learning aims to automatically improve a model given sample data. Many problems in the field are formulated as the search for a parameter set to the model that is is optimal w.r.t. some objective function. If the model is suitable (like the ubiquitous [neural network models](https://en.wikipedia.org/wiki/Artificial_neural_network) are), variants of [stochastic gradient descent (SGD)](https://en.wikipedia.org/wiki/Stochastic_gradient_descent) are frequently used to solve said optimization problem.
@@ -21,6 +21,7 @@ We suggest the following solution:
 ## Setup
 ![overview](./dpsa-overview-2.svg)
 
+## Threat model
 The following entities participate:
 1. The **clients** hold sensitive data on which the machine learning task is supposed to be executed.
 2. The **aggregation servers** perform gradient aggregation without seeing plaintext submissions.
